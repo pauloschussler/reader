@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/dashboard', function () {
-    return view('welcome');
-});
-Route::get('/addRecords', function () {
-    return view('welcome');
-});
-Route::get('/edit/:id', function () {
-    return view('welcome');
-});
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('/addRecord', "RecordController");
+require __DIR__.'/auth.php';
