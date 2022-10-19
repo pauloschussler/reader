@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use App\Models\Records;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 class RecordsController extends Controller
 {
@@ -15,8 +19,14 @@ class RecordsController extends Controller
     public function index()
     {
 
-        $records = Records::orderBy('updated_at', 'DESC')->get();
-        return response()->json(['status' => 200, 'records' => $records]);
+        if (Auth::check()) {
+
+            $records = Records::all();
+            return Inertia::render('Records/Index', ['records' => $records]);
+        } else {
+
+            return redirect('/dashboard');
+        }
     }
 
     /**
@@ -26,7 +36,7 @@ class RecordsController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Records/Create');
     }
 
     /**
@@ -110,12 +120,10 @@ class RecordsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-
-        $records = Records::find($id);
-        if ($records->delete()) {
-            return response()->json(["status" => 200]);
-        }
+        Records::find($id)->delete();
+        return redirect()->route('records.index');
     }
 }

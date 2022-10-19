@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\RecordsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,8 @@ use Inertia\Inertia;
 |
 */
 
+Route::resource('records', RecordsController::class);
+
 Route::get('/', function () {
     return redirect('/dashboard');
 });
@@ -23,4 +26,4 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
