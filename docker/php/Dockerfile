@@ -26,6 +26,7 @@ RUN apt-get update \
         unzip \
         zip \
         nodejs \
+
     && apt-get clean \
     && pecl install redis \
     && docker-php-ext-configure gd \
@@ -34,11 +35,9 @@ RUN apt-get update \
         gd \
         exif \
         opcache \
-        pdo_mysql \
-        pdo_pgsql \
-        pgsql \
         pcntl \
         zip \
+        pdo pdo_pgsql \
     && docker-php-ext-enable redis \
     && rm -rf /var/lib/apt/lists/*;
 

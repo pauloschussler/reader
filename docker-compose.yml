@@ -13,7 +13,7 @@ services:
     depends_on:
       - db
     networks:
-      - app_network
+      - reader_network
 
   nginx:
     container_name: nginx
@@ -30,17 +30,20 @@ services:
       NGINX_FPM_HOST: reader
       NGINX_ROOT: /usr/src/app/public
     networks:
-      - app_network
+      - reader_network
 
   db:
-    image: postgres:14.2-alpine
+    image: postgres:14
     restart: always
+    container_name: postgres    
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_DATABASE}
     ports:
       - "5432:5432"
+    networks:
+      - reader_network
 
   redis:
     container_name: redis
@@ -48,9 +51,9 @@ services:
     ports:
       - 6379:6379
     networks:
-      - app_network
+      - reader_network
 
 networks:
-  app_network:
+  reader_network:
     driver: bridge
 
