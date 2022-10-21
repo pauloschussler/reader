@@ -38,7 +38,7 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel forInput="email" value="E-mail" />
+                    <InputLabel forInput="email" value="Email" />
 
                     <TextInput
                         type="text"
@@ -54,7 +54,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="password" value="Senha" />
+                    <InputLabel forInput="password" value="Password" />
 
                     <TextInput
                         type="password"
@@ -72,34 +72,23 @@ export default function Login({ status, canResetPassword }) {
                     <label className="flex items-center">
                         <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
 
-                        <span className="ml-2 text-sm text-gray-600">Lembrar</span>
+                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
                     </label>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    {/* {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900"
-                        >
-                            Esqueceu a senha?
-                        </Link>
-                    )} */}
-
-                    <PrimaryButton className="ml-4" processing={processing}>
-                        Entrar
-                    </PrimaryButton>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
                     {canResetPassword && (
                         <Link
-                            href={route('register')}
+                            href={route('password.request')}
                             className="underline text-sm text-gray-600 hover:text-gray-900"
                         >
-                            Criar conta
+                            Forgot your password?
                         </Link>
                     )}
+
+                    <PrimaryButton className="ml-4" processing={processing}>
+                        Log in
+                    </PrimaryButton>
                 </div>
             </form>
         </GuestLayout>

@@ -36,7 +36,7 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel forInput="name" value="Nome" />
+                    <InputLabel forInput="name" value="Name" />
 
                     <TextInput
                         type="text"
@@ -53,7 +53,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="email" value="E-mail" />
+                    <InputLabel forInput="email" value="Email" />
 
                     <TextInput
                         type="email"
@@ -69,7 +69,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="password" value="Senha" />
+                    <InputLabel forInput="password" value="Password" />
 
                     <TextInput
                         type="password"
@@ -85,7 +85,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="password_confirmation" value="Confirmar Senha" />
+                    <InputLabel forInput="password_confirmation" value="Confirm Password" />
 
                     <TextInput
                         type="password"
@@ -101,11 +101,11 @@ export default function Register() {
 
                 <div className="flex items-center justify-end mt-4">
                     <Link href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
-                        Login
+                        Already registered?
                     </Link>
 
                     <PrimaryButton className="ml-4" processing={processing}>
-                        Registrar
+                        Register
                     </PrimaryButton>
                 </div>
             </form>

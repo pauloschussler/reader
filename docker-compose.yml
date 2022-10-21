@@ -11,3 +11,15 @@ services:
       POSTGRES_DB: ${DB_DATABASE}
     ports:
       - "5432:5432"
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    expose:
+      - 9000
+    volumes:
+      - .:/usr/src/app
+      - ./public:/usr/src/app/public
+    depends_on:
+      - db
