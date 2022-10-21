@@ -19,7 +19,12 @@ use App\Http\Controllers\RecordsController;
 Route::resource('records', RecordsController::class);
 
 Route::get('/', function () {
-    return redirect('/dashboard');
+    return Inertia::render('Dashboard', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
 Route::get('/dashboard', function () {
@@ -27,3 +32,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
+
+Route::get('file-upload', [FileController::class, 'index'])->name('file.upload');
+Route::post('file-upload', [FileController::class, 'store'])->name('file.upload.store');

@@ -36,7 +36,15 @@ class RecordsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Records/Create');
+
+
+        if (Auth::check()) {
+
+            return Inertia::render('Records/Create');
+        } else {
+
+            return redirect('/dashboard');
+        }
     }
 
     /**
@@ -48,20 +56,29 @@ class RecordsController extends Controller
     public function store(Request $request)
     {
 
-        $newRecords = Records::create([
-            'cpf' => $request->cpf,
-            'private' => $request->private,
-            'incompleto' => $request->incompleto,
-            'ticket_medio' => $request->ticket_medio,
-            'ticket_ultima_compra' => $request->ticket_ultima_compra,
-            'loja_mais_frequente' => $request->loja_mais_frequente,
-            'loja_ultima_compra' => $request->loja_ultima_compra
-        ]);
+        Validator::make($request->all(), [
+            'file' => ['required'],
+        ])->validate();
 
-        if ($newRecords) {
+        $fileName = time() . '.' . $request->file->extension();
+        $request->file->move(public_path('uploads'), $fileName);
 
-            return response()->json(["status" => 200]);
-        }
+        return response()->json(["status" => print_r($request->file)]);
+
+        // $newRecords = Records::create([
+        //     'cpf' => $request->cpf,
+        //     'private' => $request->private,
+        //     'incompleto' => $request->incompleto,
+        //     'ticket_medio' => $request->ticket_medio,
+        //     'ticket_ultima_compra' => $request->ticket_ultima_compra,
+        //     'loja_mais_frequente' => $request->loja_mais_frequente,
+        //     'loja_ultima_compra' => $request->loja_ultima_compra
+        // ]);
+
+        // if ($newRecords) {
+
+        //     return response()->json(["status" => 200]);
+        // }
     }
 
     /**
