@@ -11,7 +11,7 @@ services:
       - .:/usr/src/app
       - ./public:/usr/src/app/public
     depends_on:
-      - blog_db
+      - db
     networks:
       - app_network
 
@@ -32,7 +32,7 @@ services:
     networks:
       - app_network
 
-  database:
+  db:
     image: postgres:14.2-alpine
     restart: always
     environment:
