@@ -1,18 +1,7 @@
-version: '3.1'
-
+version: "3.8"
 services:
-
-  db:
-    image: postgres:14.2-alpine
-    restart: always
-    environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
-    ports:
-      - "5432:5432"
-  app:
-    container_name: app
+  reader:
+    container_name: reader
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
@@ -22,4 +11,46 @@ services:
       - .:/usr/src/app
       - ./public:/usr/src/app/public
     depends_on:
-      - db
+      - blog_db
+    networks:
+      - app_network
+
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    volumes:
+    - ./public:/usr/src/app/public
+    ports:
+      - 8000:80
+    depends_on:
+      - reader
+    environment:
+      NGINX_FPM_HOST: reader
+      NGINX_ROOT: /usr/src/app/public
+    networks:
+      - app_network
+
+  database:
+    image: postgres:14.2-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "5432:5432"
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
