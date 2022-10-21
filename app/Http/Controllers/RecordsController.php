@@ -57,7 +57,7 @@ class RecordsController extends Controller
     {
 
         Validator::make($request->all(), [
-            'file' => ['required'],
+            'file' => 'required|max:10240',
         ])->validate();
 
         $fileName = time() . '.' . $request->file->extension();

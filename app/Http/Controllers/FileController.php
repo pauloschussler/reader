@@ -28,22 +28,18 @@ class FileController extends Controller
      *
      * @return Response
      */
-    
+
     public function store(Request $request)
     {
+
         Validator::make($request->all(), [
             'title' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file' => 'required|mimes:text,csv|max:10240',
         ])->validate();
 
         $fileName = time() . '.' . $request->file->extension();
         $request->file->move(public_path('uploads'), $fileName);
 
-        File::create([
-            'title' => $request->title,
-            'name' => $fileName
-        ]);
-
-        return redirect()->route('file.upload');
+        return response()->json(["status" => print_r($request->file)]);
     }
 }
