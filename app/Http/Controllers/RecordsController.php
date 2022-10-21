@@ -61,9 +61,36 @@ class RecordsController extends Controller
         ])->validate();
 
         $fileName = time() . '.' . $request->file->extension();
-        $request->file->move(public_path('uploads'), $fileName);
 
-        return response()->json(["status" => print_r($request->file)]);
+        $fileLines = file($request->file, FILE_IGNORE_NEW_LINES);
+
+        unset($fileLines[0]);
+
+        $data = [];
+
+        foreach ($fileLines as $line) {
+
+            $lineData = preg_replace('/ {2,}/', ',', $line);
+            $lineData = explode(',', $lineData);
+
+            Records::create([
+                'cpf' => $lineData[0] == "NULL" ? NULL : $lineData[0],
+                'private' => $lineData[1] == "NULL" ? NULL : $lineData[1],
+                'incompleto' => $lineData[2] == "NULL" ? NULL : $lineData[2],
+                'data_ultima_compra' => $lineData[3] == "NULL" ? NULL : $lineData[3],
+                'ticket_medio' => $lineData[4] == "NULL" ? NULL : $lineData[3],
+                'ticket_ultima_compra' => $lineData[5] == "NULL" ? NULL : $lineData[4],
+                'loja_mais_frequente' => $lineData[6] == "NULL" ? NULL : $lineData[5],
+                'loja_ultima_compra' => $lineData[7] == "NULL" ? NULL : $lineData[6],
+            ]);
+        }
+
+
+        // $retorno = explode(",", $output);
+
+
+        return response()->json(['content' => $data]);
+
 
         // $newRecords = Records::create([
         //     'cpf' => $request->cpf,

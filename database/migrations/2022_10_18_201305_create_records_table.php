@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id();
-            $table->string("cpf");
-            $table->boolean("private");
-            $table->boolean("incompleto");
-            $table->float("ticket_medio");
-            $table->float("ticket_ultima_compra");
-            $table->string("loja_mais_frequente");
-            $table->string("loja_ultima_compra");
+            $table->string("cpf")->nullable($value = true);
+            $table->boolean("private")->nullable($value = true);
+            $table->boolean("incompleto")->nullable($value = true);
+            $table->date("data_ultima_compra")->nullable($value = true);
+            $table->float("ticket_medio")->nullable($value = true);
+            $table->float("ticket_ultima_compra")->nullable($value = true);
+            $table->string("loja_mais_frequente")->nullable($value = true);
+            $table->string("loja_ultima_compra")->nullable($value = true);
             $table->timestamps();
         });
     }
