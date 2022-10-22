@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\RecordsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\RecordsController;
+use App\Http\Controllers\FilesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,10 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::resource('records', RecordsController::class);
+Route::resource('files', FilesController::class);
+
 
 Route::get('/', function () {
     return Inertia::render('Dashboard');

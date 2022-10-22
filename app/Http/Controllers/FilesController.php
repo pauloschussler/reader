@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
-use App\Models\File;
+use App\Models\Files;
+use Illuminate\Support\Facades\Auth;
 
-class FileController extends Controller
+class FilesController extends Controller
 {
 
     /**
@@ -15,12 +16,18 @@ class FileController extends Controller
      *
      * @return Response
      */
+
     public function index()
     {
 
-        $files = File::latest()->get();
+        if (Auth::check()) {
 
-        return Inertia::render('FileUpload', compact('files'));
+            $files = Files::all();
+            return Inertia::render('Files/Index', ['files' => $files]);
+        } else {
+
+            return redirect('/dashboard');
+        }
     }
 
     /**
