@@ -22,6 +22,10 @@ class RecordsController extends Controller
         if (Auth::check()) {
 
             $records = Records::all();
+
+            $records = Records::orderBy('created_at', 'DESC')
+                ->paginate(20);
+
             return Inertia::render('Records/Index', ['records' => $records]);
         } else {
 
@@ -36,7 +40,6 @@ class RecordsController extends Controller
      */
     public function create()
     {
-
 
         if (Auth::check()) {
 

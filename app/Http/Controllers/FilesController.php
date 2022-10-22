@@ -62,8 +62,9 @@ class FilesController extends Controller
 
         Files::create([
             'name' => $fileName,
+            'user' => Auth::user()->id,
             'lines' => sizeof($fileLines),
-            'size' => $request->file->getSize()
+            'size' => $request->file->getSize(),
         ]);
 
         unset($fileLines[0]);
@@ -78,27 +79,7 @@ class FilesController extends Controller
             $this->createRecord($lineData);
         }
 
-
-        // $retorno = explode(",", $output);
-
-
-        return response()->json(['content' =>  '']);
-
-
-        // $newRecords = Records::create([
-        //     'cpf' => $request->cpf,
-        //     'private' => $request->private,
-        //     'incompleto' => $request->incompleto,
-        //     'ticket_medio' => $request->ticket_medio,
-        //     'ticket_ultima_compra' => $request->ticket_ultima_compra,
-        //     'loja_mais_frequente' => $request->loja_mais_frequente,
-        //     'loja_ultima_compra' => $request->loja_ultima_compra
-        // ]);
-
-        // if ($newRecords) {
-
-        //     return response()->json(["status" => 200]);
-        // }
+        return response()->json(['content' =>  Auth::user()]);
     }
 
     private function createRecord(array $record)
