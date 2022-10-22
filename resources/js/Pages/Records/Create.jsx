@@ -31,6 +31,7 @@ export default function Dashboard(props) {
         >
             <Head title="Adicionar Registros" />
 
+
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -39,7 +40,7 @@ export default function Dashboard(props) {
                             <form name="createForm" onSubmit={handleSubmit}>
                                 <div className="flex flex-col">
                                     <div className="mb-4">
-                                        <label className="">CPF</label>
+                                        <label className="text-uppercase font-weight-bold">CPF</label>
                                         <input
                                             type="text"
                                             className="w-full px-4 py-2"
@@ -55,7 +56,7 @@ export default function Dashboard(props) {
                                         </span>
                                     </div>
                                     <div className="mb-0">
-                                        <label className="">Privado</label>
+                                    <label className="text-uppercase font-weight-bold">Privado</label>
                                         <Select
                                             type="select"
                                             className="ml-2 text-sm font-medium0"
@@ -73,25 +74,25 @@ export default function Dashboard(props) {
                                         </span>
                                     </div>
                                     <div className="mb-0">
-                                        <label className="">Privado</label>
+                                    <label className="text-uppercase font-weight-bold">Incompleto</label>
                                         <Select
                                             type="select"
                                             className="ml-2 text-sm font-medium0"
                                             label="private"
                                             name="private"
                                             options={privateOptions}
-                                            errors={errors.private}
-                                            value={data.private}
+                                            errors={errors.incompleto}
+                                            value={data.incompleto}
                                             onChange={(e) =>
-                                                setData("private", e.target.value)
+                                                setData("incompleto", e.target.value)
                                             }
                                         />
                                         <span className="text-red-600">
-                                            {errors.private}
+                                            {errors.incompleto}
                                         </span>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="">Ticket Médio</label>
+                                        <label className="text-uppercase font-weight-bold">Ticket Médio</label>
                                         <input
                                             type="number"
                                             step="0.01"
@@ -107,30 +108,80 @@ export default function Dashboard(props) {
                                             {errors.ticket_medio}
                                         </span>
                                     </div>
+                                    <div className="mb-4">
+                                        <label className="text-uppercase font-weight-bold">Ticket última compra</label>
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            className="w-full px-4 py-2"
+                                            label="Ticket última compra"
+                                            name="ticket_ultima_compra"
+                                            value={data.ticket_ultima_compra}
+                                            onChange={(e) =>
+                                                setData("ticket_ultima_compra", e.target.value)
+                                            }
+                                        />
+                                        <span className="text-red-600">
+                                            {errors.ticket_ultima_compra}
+                                        </span>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="text-uppercase font-weight-bold">Loja mais frequente</label>
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            className="w-full px-4 py-2"
+                                            label="Loja mais frequente"
+                                            name="loja_mais_frequente"
+                                            value={data.loja_mais_frequente}
+                                            onChange={(e) =>
+                                                setData("loja_mais_frequente", e.target.value)
+                                            }
+                                        />
+                                        <span className="text-red-600">
+                                            {errors.loja_mais_frequente}
+                                        </span>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="text-uppercase font-weight-bold">Loja última compra</label>
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            className="w-full px-4 py-2"
+                                            label="Loja última compra"
+                                            name="loja_ultima_compra"
+                                            value={data.loja_ultima_compra}
+                                            onChange={(e) =>
+                                                setData("loja_ultima_compra", e.target.value)
+                                            }
+                                        />
+                                        <span className="text-red-600">
+                                            {errors.loja_ultima_compra}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className="mt-4">
                                     <button
                                         type="submit"
-                                        className="px-6 py-2 font-bold text-white bg-green-500 rounded"
+                                        className="px-6 py-2 font-bold text-white border border-success bg-green-500 rounded"
                                     >
-                                        Save
+                                        Adicionar
                                     </button>
-                                </div>
 
-                                <div className="flex items-center justify-between mb-6">
-                                    <Link
-                                        className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
-                                        href={route("records.index")}
-                                    >
-                                        Cancelar
+                                    <Link className="px-6 py-2 ml-2 border border-dark font-bold text-dark bg-white-500 rounded-md"
+                                        href={route("records.index")}>
+                                        <button>
+                                            Cancelar
+                                        </button>
                                     </Link>
                                 </div>
+
                             </form>
 
                         </div>
                     </div>
                 </div>
-            </div>
-        </AuthenticatedLayout>
+            </div >
+        </AuthenticatedLayout >
     );
 }

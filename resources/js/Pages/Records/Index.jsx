@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from "@inertiajs/inertia";
 import { Head, usePage, Link } from '@inertiajs/inertia-react';
 import Pagination from '@/Components/Pagination';
+import { Button } from 'bootstrap';
 
 export default function Dashboard(props) {
 
@@ -28,14 +29,14 @@ export default function Dashboard(props) {
                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div className="p-6 bg-white border-b border-gray-200">
 
-                        {/* <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center justify-between mb-6">
                             <Link
                                 className="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
                                 href={route("records.create")}
                             >
                                 Adicionar
                             </Link>
-                        </div> */}
+                        </div>
 
                         <table className="table-fixed w-full">
                             <thead>
