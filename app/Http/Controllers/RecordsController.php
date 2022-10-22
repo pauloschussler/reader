@@ -21,10 +21,7 @@ class RecordsController extends Controller
 
         if (Auth::check()) {
 
-            $records = Records::all();
-
-            $records = Records::orderBy('created_at', 'DESC')
-                ->paginate(20);
+            $records = Records::orderBy('id', 'DESC')->paginate(20);
 
             return Inertia::render('Records/Index', ['records' => $records]);
         } else {

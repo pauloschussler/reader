@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState }from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from "@inertiajs/inertia";
 import { Head, useForm, usePage, Link } from '@inertiajs/inertia-react';
@@ -7,25 +7,30 @@ export default function Dashboard(props) {
 
     const { files } = usePage().props
 
+    const [loadig, setLoading] = useState(false);
+
     const { data, setData, errors, post, progress } = useForm({
         file: null,
     });
 
     function handleSubmit(e) {
 
+        setLoading(true);
+
         e.preventDefault();
+
         post(route("files.store"));
 
-        setData("file", null)
+        setData("file", null);
     }
 
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Adicionar registros</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Importar registros</h2>}
         >
-            <Head title="Adicionar Registros" />
+            <Head title="Importar Registros" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -39,7 +44,7 @@ export default function Dashboard(props) {
                                         <input
                                             type="file"
                                             className="w-full px-4 py-2"
-                                            label="File"
+                                            label="Arquivo"
                                             name="file"
                                             onChange={(e) =>
                                                 setData("file", e.target.files[0])
@@ -62,7 +67,7 @@ export default function Dashboard(props) {
                                         type="submit"
                                         className="px-6 py-2 font-bold text-white bg-green-500 rounded"
                                     >
-                                        Save
+                                        Importar
                                     </button>
                                 </div>
                             </form>

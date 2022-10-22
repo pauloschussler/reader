@@ -19,8 +19,8 @@ return new class extends Migration
             $table->boolean("private")->nullable($value = true);
             $table->boolean("incompleto")->nullable($value = true);
             $table->date("data_ultima_compra")->nullable($value = true);
-            $table->float("ticket_medio")->nullable($value = true);
-            $table->float("ticket_ultima_compra")->nullable($value = true);
+            $table->decimal('ticket_medio')->nullable($value = true);
+            $table->decimal('ticket_ultima_compra')->nullable($value = true);
             $table->string("loja_mais_frequente")->nullable($value = true);
             $table->string("loja_ultima_compra")->nullable($value = true);
             $table->timestamps();

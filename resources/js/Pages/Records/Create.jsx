@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from "@inertiajs/inertia";
 import { Head, useForm, usePage, Link } from '@inertiajs/inertia-react';
@@ -11,12 +12,15 @@ export default function Dashboard(props) {
         file: null,
     });
 
+    const privateOptions = [
+        { value: true, label: 'Sim' },
+        { value: false, label: 'Não' },
+    ]
+
     function handleSubmit(e) {
 
         e.preventDefault();
         post(route("records.store"));
-
-        setData("file", null)
     }
 
     return (
@@ -34,29 +38,76 @@ export default function Dashboard(props) {
 
                             <form name="createForm" onSubmit={handleSubmit}>
                                 <div className="flex flex-col">
-                                    <div className="mb-0">
-                                        <label className="">Selecione o arquivo</label>
+                                    <div className="mb-4">
+                                        <label className="">CPF</label>
                                         <input
-                                            type="file"
+                                            type="text"
                                             className="w-full px-4 py-2"
-                                            label="File"
-                                            name="file"
+                                            label="CPF"
+                                            name="cpf"
+                                            value={data.cpf}
                                             onChange={(e) =>
-                                                setData("file", e.target.files[0])
+                                                setData("cpf", e.target.value)
                                             }
                                         />
                                         <span className="text-red-600">
-                                            {errors.file}
+                                            {errors.cpf}
+                                        </span>
+                                    </div>
+                                    <div className="mb-0">
+                                        <label className="">Privado</label>
+                                        <Select
+                                            type="select"
+                                            className="ml-2 text-sm font-medium0"
+                                            label="private"
+                                            name="private"
+                                            options={privateOptions}
+                                            errors={errors.private}
+                                            value={data.private}
+                                            onChange={(e) =>
+                                                setData("private", e.target.value)
+                                            }
+                                        />
+                                        <span className="text-red-600">
+                                            {errors.private}
+                                        </span>
+                                    </div>
+                                    <div className="mb-0">
+                                        <label className="">Privado</label>
+                                        <Select
+                                            type="select"
+                                            className="ml-2 text-sm font-medium0"
+                                            label="private"
+                                            name="private"
+                                            options={privateOptions}
+                                            errors={errors.private}
+                                            value={data.private}
+                                            onChange={(e) =>
+                                                setData("private", e.target.value)
+                                            }
+                                        />
+                                        <span className="text-red-600">
+                                            {errors.private}
+                                        </span>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="">Ticket Médio</label>
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            className="w-full px-4 py-2"
+                                            label="Ticket médio"
+                                            name="ticket_medio"
+                                            value={data.ticket_medio}
+                                            onChange={(e) =>
+                                                setData("ticket_medio", e.target.value)
+                                            }
+                                        />
+                                        <span className="text-red-600">
+                                            {errors.ticket_medio}
                                         </span>
                                     </div>
                                 </div>
-
-                                {progress && (
-                                    <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                                        <div className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" width={progress.percentage}> {progress.percentage}%</div>
-                                    </div>
-                                )}
-
                                 <div className="mt-4">
                                     <button
                                         type="submit"
@@ -65,7 +116,17 @@ export default function Dashboard(props) {
                                         Save
                                     </button>
                                 </div>
+
+                                <div className="flex items-center justify-between mb-6">
+                                    <Link
+                                        className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
+                                        href={route("records.index")}
+                                    >
+                                        Cancelar
+                                    </Link>
+                                </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

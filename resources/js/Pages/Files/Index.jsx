@@ -2,13 +2,14 @@ import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from "@inertiajs/inertia";
 import { Head, usePage, Link } from '@inertiajs/inertia-react';
+import Pagination from '@/Components/Pagination';
 
 export default function Dashboard(props) {
 
     const { files } = usePage().props
 
     function destroy(e) {
-        if (confirm("Are you sure you want to delete this user?")) {
+        if (confirm("Confirmar a exclusão do registro de arquivo?")) {
             Inertia.delete(route("files.destroy", e.currentTarget.id));
         }
     }
@@ -17,9 +18,9 @@ export default function Dashboard(props) {
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Registros</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Arquivos</h2>}
         >
-            <Head title="Registros" />
+            <Head title="Arquivos" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -31,33 +32,35 @@ export default function Dashboard(props) {
                                     className="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
                                     href={route("files.create")}
                                 >
-                                    Carregar dados
+                                    Importar arquivo
                                 </Link>
                             </div>
 
                             <table className="table-fixed w-full">
                                 <thead>
                                     <tr className="bg-gray-100">
-                                        <th className="px-4 py-2 w-20">No.</th>
-                                        <th className="px-4 py-2">Title</th>
-                                        <th className="px-4 py-2">Body</th>
-                                        <th className="px-4 py-2">Action</th>
+                                        <th className="px-4 py-2 w-20">ID</th>
+                                        <th className="px-4 py-2">Nome</th>
+                                        <th className="px-4 py-2">Linhas</th>
+                                        <th className="px-4 py-2">Tamanho</th>
+                                        <th className="px-4 py-2">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {files.map(({ id }) => (
+                                    {files.data.map(({ id, name, lines, size }) => (
                                         <tr>
                                             <td className="border px-4 py-2">{id}</td>
-                                            <td className="border px-4 py-2"></td>
-                                            <td className="border px-4 py-2"></td>
+                                            <td className="border px-4 py-2">{name}</td>
+                                            <td className="border px-4 py-2">{lines}</td>
+                                            <td className="border px-4 py-2">{size}</td>
                                             <td className="border px-4 py-2">
-                                                <Link
+                                                {/* <Link
                                                     tabIndex="1"
                                                     className="px-4 py-2 text-sm text-white bg-blue-500 rounded"
                                                     href={route("files.edit", id)}
                                                 >
                                                     Edit
-                                                </Link>
+                                                </Link> */}
                                                 <button
                                                     onClick={destroy}
                                                     id={id}
@@ -65,24 +68,26 @@ export default function Dashboard(props) {
                                                     type="button"
                                                     className="mx-1 px-4 py-2 text-sm text-white bg-red-500 rounded"
                                                 >
-                                                    Delete
+                                                    Excluir
                                                 </button>
                                             </td>
                                         </tr>
                                     ))}
 
-                                    {files.length === 0 && (
+                                    {files.data.length === 0 && (
                                         <tr>
                                             <td
                                                 className="px-6 py-4 border-t"
                                                 colSpan="4"
                                             >
-                                                No contacts found.
+                                                Nenhum arquivo encontrado.
                                             </td>
                                         </tr>
                                     )}
                                 </tbody>
                             </table>
+
+                            <Pagination class="mt-6" links={files.links} />
                         </div>
                     </div>
                 </div>
