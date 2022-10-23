@@ -74,15 +74,24 @@ class FilesController extends Controller
 
         unset($fileLines[0]);
 
-        if ($request->file->extension()) {
-        }
+        if ($request->file->extension() == 'csv') {
 
-        foreach ($fileLines as $line) {
+            foreach ($fileLines as $line) {
 
-            $lineData = preg_replace('/ {2,}/', ';', $line);
-            $lineData = explode(';', $lineData);
+                $lineData = preg_replace('/ {2,}/', '', $line);
+                $lineData = explode(';', $lineData);
 
-            $this->createRecord($lineData);
+                $this->createRecord($lineData);
+            }
+        } else if ($request->file->extension() == 'txt') {
+
+            foreach ($fileLines as $line) {
+
+                $lineData = preg_replace('/ {2,}/', ';', $line);
+                $lineData = explode(';', $lineData);
+
+                $this->createRecord($lineData);
+            }
         }
 
         return redirect('/files');
