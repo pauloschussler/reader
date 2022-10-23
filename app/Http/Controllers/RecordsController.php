@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Records;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Validation\Validation;
 
 
 class RecordsController extends Controller

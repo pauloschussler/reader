@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Files;
 use App\Models\Records;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Validation\Validation;
 
 class FilesController extends Controller
 {
@@ -103,16 +104,21 @@ class FilesController extends Controller
     private function createRecord(array $record)
     {
 
-        Records::create([
-            'cpf' => isset($record[0]) && $record[0] != "NULL" ? $record[0] : null,
-            'privado' => isset($record[1]) && $record[1] != "NULL" ? $record[1] : null,
-            'incompleto' => isset($record[2]) && $record[2] != "NULL" ? $record[2] : null,
-            'data_ultima_compra' => isset($record[3]) && $record[3] != "NULL" ? $record[3] : null,
-            'ticket_medio' => isset($record[4]) && $record[4] != "NULL" ? (float)$record[4] : null,
-            'ticket_ultima_compra' => isset($record[5]) && $record[5] != "NULL" ? (float)$record[5] : null,
-            'loja_mais_frequente' => isset($record[6]) && $record[6] != "NULL" ? $record[6] : null,
-            'loja_ultima_compra' => isset($record[7]) && $record[7] != "NULL" ? $record[7] : null,
-        ]);
+        $validation = new Validation();
+
+        if (isset($record[0]) && isset($record[6]) && isset($record[7]) && $validation->validateCpf($record[0]) && $validation->validateCnpj($record[6]) && $validation->validateCnpj($record[7])) {
+
+            Records::create([
+                'cpf' => isset($record[0]) && $record[0] != "NULL" ? $record[0] : null,
+                'privado' => isset($record[1]) && $record[1] != "NULL" ? $record[1] : null,
+                'incompleto' => isset($record[2]) && $record[2] != "NULL" ? $record[2] : null,
+                'data_ultima_compra' => isset($record[3]) && $record[3] != "NULL" ? $record[3] : null,
+                'ticket_medio' => isset($record[4]) && $record[4] != "NULL" ? (float)$record[4] : null,
+                'ticket_ultima_compra' => isset($record[5]) && $record[5] != "NULL" ? (float)$record[5] : null,
+                'loja_mais_frequente' => isset($record[6]) && $record[6] != "NULL" ? $record[6] : null,
+                'loja_ultima_compra' => isset($record[7]) && $record[7] != "NULL" ? $record[7] : null,
+            ]);
+        }
     }
 
     /**
