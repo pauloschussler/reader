@@ -13,24 +13,28 @@ export default function Dashboard(props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <Link
-                            href={route('records.index')}
-                            className="underline text-sm text-gray-900 hover:text-gray-900"
-                        >
-                            Registros
-                        </Link>
-                    </div>
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <Link
-                            href={route('files.index')}
-                            className="underline text-sm text-gray-900 hover:text-gray-900"
-                        >
-                            Arquivos
-                        </Link>
-                    </div>
+                    <ul className="bg-slate-50 p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 text-sm leading-6">
+                        <li className="flex">
+
+                            <Link
+                                href={route('records.index')}
+                                className="hover:border-blue-500 hover:border-solid hover:bg-white hover:text-blue-500 group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3"
+                            >
+                                Registros
+                            </Link>
+                        </li>
+                        <li className="flex">
+
+                            <Link
+                                href={route('files.index')}
+                                className="hover:border-blue-500 hover:border-solid hover:bg-white hover:text-blue-500 group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3"
+                            >
+                                Arquivos
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AuthenticatedLayout >
     );
 }

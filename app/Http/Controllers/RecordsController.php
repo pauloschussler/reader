@@ -56,56 +56,20 @@ class RecordsController extends Controller
     public function store(Request $request)
     {
 
-        Validator::make($request->all(), [
-            'file' => 'required|max:10240',
-        ])->validate();
+        $newRecords = Records::create([
+            'cpf' => $request->cpf,
+            'privado' => $request->privado,
+            'incompleto' => $request->incompleto,
+            'ticket_medio' => $request->ticket_medio,
+            'ticket_ultima_compra' => $request->ticket_ultima_compra,
+            'loja_mais_frequente' => $request->loja_mais_frequente,
+            'loja_ultima_compra' => $request->loja_ultima_compra
+        ]);
 
-        $fileName = time() . '.' . $request->file->extension();
+        if ($newRecords) {
 
-        $fileLines = file($request->file, FILE_IGNORE_NEW_LINES);
-
-        unset($fileLines[0]);
-
-        $data = [];
-
-        foreach ($fileLines as $line) {
-
-            $lineData = preg_replace('/ {2,}/', ',', $line);
-            $lineData = explode(',', $lineData);
-
-            Records::create([
-                'cpf' => $lineData[0] == "NULL" ? NULL : $lineData[0],
-                'private' => $lineData[1] == "NULL" ? NULL : $lineData[1],
-                'incompleto' => $lineData[2] == "NULL" ? NULL : $lineData[2],
-                'data_ultima_compra' => $lineData[3] == "NULL" ? NULL : $lineData[3],
-                'ticket_medio' => $lineData[4] == "NULL" ? NULL : $lineData[3],
-                'ticket_ultima_compra' => $lineData[5] == "NULL" ? NULL : $lineData[4],
-                'loja_mais_frequente' => $lineData[6] == "NULL" ? NULL : $lineData[5],
-                'loja_ultima_compra' => $lineData[7] == "NULL" ? NULL : $lineData[6],
-            ]);
+            return redirect()->route('records.index');
         }
-
-
-        // $retorno = explode(",", $output);
-
-
-        return response()->json(['content' => $data]);
-
-
-        // $newRecords = Records::create([
-        //     'cpf' => $request->cpf,
-        //     'private' => $request->private,
-        //     'incompleto' => $request->incompleto,
-        //     'ticket_medio' => $request->ticket_medio,
-        //     'ticket_ultima_compra' => $request->ticket_ultima_compra,
-        //     'loja_mais_frequente' => $request->loja_mais_frequente,
-        //     'loja_ultima_compra' => $request->loja_ultima_compra
-        // ]);
-
-        // if ($newRecords) {
-
-        //     return response()->json(["status" => 200]);
-        // }
     }
 
     /**
@@ -128,8 +92,15 @@ class RecordsController extends Controller
     public function edit($id)
     {
 
-        $records = Records::find($id);
-        return response()->json(['status' => 200, 'records' => $records]);
+        if (Auth::check()) {
+
+            return Inertia::render('Records/Edit', [
+                'record' => Records::whereId($id)->first()
+            ]);
+        } else {
+
+            return redirect('/dashboard');
+        }
     }
 
     /**
@@ -145,7 +116,7 @@ class RecordsController extends Controller
         $records = Records::find($id);
 
         $records->cpf = $request->cpf;
-        $records->private = $request->private;
+        $records->privado = $request->privado;
         $records->incompleto = $request->incompleto;
         $records->ticket_medio = $request->ticket_medio;
         $records->ticket_ultima_compra = $request->ticket_ultima_compra;
@@ -154,7 +125,7 @@ class RecordsController extends Controller
 
         if ($records->save()) {
 
-            return response()->json(["status" => 200]);
+            return redirect()->route('records.index');
         }
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->id();
             $table->string("cpf")->nullable($value = true);
-            $table->boolean("private")->nullable($value = true);
+            $table->boolean("privado")->nullable($value = true);
             $table->boolean("incompleto")->nullable($value = true);
             $table->date("data_ultima_compra")->nullable($value = true);
             $table->decimal('ticket_medio')->nullable($value = true);

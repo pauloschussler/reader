@@ -20,8 +20,6 @@ export default function Dashboard(props) {
         e.preventDefault();
 
         post(route("files.store"));
-
-        setData("file", null);
     }
 
     return (

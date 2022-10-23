@@ -3,7 +3,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from "@inertiajs/inertia";
 import { Head, usePage, Link } from '@inertiajs/inertia-react';
 import Pagination from '@/Components/Pagination';
-import { Button } from 'bootstrap';
 
 export default function Dashboard(props) {
 
@@ -43,6 +42,8 @@ export default function Dashboard(props) {
                                 <tr className="bg-gray-100">
                                     <th className="px-4 py-2">ID</th>
                                     <th className="px-4 py-2">CPF</th>
+                                    <th className="px-4 py-2">Privado</th>
+                                    <th className="px-4 py-2">Incompleto</th>
                                     <th className="px-4 py-2">Ticket médio</th>
                                     <th className="px-4 py-2">Ticket última compra</th>
                                     <th className="px-4 py-2">Loja mais frequente</th>
@@ -51,28 +52,29 @@ export default function Dashboard(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {records.data.map(({ id, cpf, ticket_medio, ticket_ultima_compra, loja_mais_frequente, loja_ultima_compra }) => (
+                                {records.data.map(({ id, cpf, privado, incompleto, ticket_medio, ticket_ultima_compra, loja_mais_frequente, loja_ultima_compra }) => (
                                     <tr>
                                         <td className="border px-4 py-2">{id}</td>
                                         <td className="border px-4 py-2">{cpf}</td>
+                                        <td className="border px-4 py-2">{privado}</td>
+                                        <td className="border px-4 py-2">{incompleto}</td>
                                         <td className="border px-4 py-2">{ticket_medio}</td>
                                         <td className="border px-4 py-2">{ticket_ultima_compra}</td>
                                         <td className="border px-4 py-2">{loja_mais_frequente}</td>
                                         <td className="border px-4 py-2">{loja_ultima_compra}</td>
                                         <td className="border px-4 py-2">
-                                            {/* <Link
-                                                tabIndex="1"
-                                                className="px-4 py-2 text-sm text-white bg-blue-500 rounded"
-                                                href={route("records.edit", id)}
-                                            >
-                                                Editar
-                                            </Link> */}
+                                            <Link class="px-4 py-2 text-sm font-bold text-white bg-blue-500 rounded-md"
+                                                href={route("records.edit", id)}>
+                                                <button>
+                                                    Editar
+                                                </button>
+                                            </Link>
                                             <button
                                                 onClick={destroy}
                                                 id={id}
                                                 tabIndex="-1"
                                                 type="button"
-                                                className="mx-1 px-4 py-2 text-sm text-white bg-red-500 rounded"
+                                                className="mx-1 px-4 py-2 font-bold text-sm text-white bg-red-500 rounded"
                                             >
                                                 Excluir
                                             </button>

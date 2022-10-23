@@ -1,33 +1,32 @@
 import React from 'react';
-import Select from 'react-select'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Inertia } from "@inertiajs/inertia";
 import { Head, useForm, usePage, Link } from '@inertiajs/inertia-react';
 
-export default function Dashboard(props) {
+export default function Create(props) {
 
-    const { files } = usePage().props
+    const { record } = usePage().props
 
-    const { data, setData, errors, post, progress } = useForm({
-        file: null,
+    const { data, setData, put, errors } = useForm({
+        cpf: record.cpf || "",
+        ticket_medio: record.ticket_medio || "",
+        privado: record.privado || "",
+        incompleto: record.incompleto || "",
+        data_ultima_compra: record.data_ultima_compra || "",
+        ticket_ultima_compra: record.ticket_ultima_compra || "",
+        loja_mais_frequente: record.loja_mais_frequente || "",
+        loja_ultima_compra: record.loja_ultima_compra || "",
     });
 
-    const privateOptions = [
-        { value: true, label: 'Sim' },
-        { value: false, label: 'Não' },
-    ]
-
     function handleSubmit(e) {
-
         e.preventDefault();
-        post(route("records.store"));
+        put(route("records.update", record.id));
     }
 
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Adicionar registros</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar registro</h2>}
         >
             <Head title="Adicionar Registros" />
 
@@ -43,8 +42,6 @@ export default function Dashboard(props) {
                                         <label className="text-uppercase font-weight-bold">CPF</label>
                                         <input type="text" className="w-full px-4 py-2" name="cpf" value={data.cpf} onChange={(e) =>
                                             setData("cpf", e.target.value)
-                                        } onkeypress={(e) =>
-                                            mask('000.000.000-00')
                                         } />
                                         <span className="text-red-600">
                                             {errors.cpf}
@@ -68,7 +65,7 @@ export default function Dashboard(props) {
                                                 setData("privado", e.target.value)
                                             }
                                         >
-                                            <option selected value="true">Sim</option>
+                                            <option defaultValue value="true">Sim</option>
                                             <option value="false">Não</option>
                                         </select>
                                     </div>
@@ -81,7 +78,7 @@ export default function Dashboard(props) {
                                                 setData("incompleto", e.target.value)
                                             }
                                         >
-                                            <option selected value="true">Sim</option>
+                                            <option defaultValue value="true">Sim</option>
                                             <option value="false">Não</option>
                                         </select>
                                     </div>
@@ -105,8 +102,7 @@ export default function Dashboard(props) {
                                     <div className="mb-4">
                                         <label className="text-uppercase font-weight-bold">Loja mais frequente</label>
                                         <input
-                                            type="number"
-                                            step="0.01"
+                                            type="text"
                                             className="w-full px-4 py-2"
                                             label="Loja mais frequente"
                                             name="loja_mais_frequente"
@@ -122,8 +118,7 @@ export default function Dashboard(props) {
                                     <div className="mb-4">
                                         <label className="text-uppercase font-weight-bold">Loja última compra</label>
                                         <input
-                                            type="number"
-                                            step="0.01"
+                                            type="text"
                                             className="w-full px-4 py-2"
                                             label="Loja última compra"
                                             name="loja_ultima_compra"
@@ -142,7 +137,7 @@ export default function Dashboard(props) {
                                         type="submit"
                                         className="px-6 py-2 font-bold text-white border border-success bg-green-500 rounded"
                                     >
-                                        Adicionar
+                                        Editar
                                     </button>
 
                                     <Link className="px-6 py-2 ml-2 border border-dark font-bold text-dark bg-white-500 rounded-md"

@@ -58,7 +58,7 @@ class FilesController extends Controller
     {
 
         Validator::make($request->all(), [
-            'file' => 'required|max:10240',
+            'file' => 'required|max:10240|mimes:csv,txt',
         ])->validate();
 
         $fileName = time() . '.' . $request->file->extension();
@@ -74,7 +74,8 @@ class FilesController extends Controller
 
         unset($fileLines[0]);
 
-        $data = [];
+        if ($request->file->extension()) {
+        }
 
         foreach ($fileLines as $line) {
 
@@ -95,7 +96,7 @@ class FilesController extends Controller
 
         Records::create([
             'cpf' => isset($record[0]) && $record[0] != "NULL" ? $record[0] : null,
-            'private' => isset($record[1]) && $record[1] != "NULL" ? $record[1] : null,
+            'privado' => isset($record[1]) && $record[1] != "NULL" ? $record[1] : null,
             'incompleto' => isset($record[2]) && $record[2] != "NULL" ? $record[2] : null,
             'data_ultima_compra' => isset($record[3]) && $record[3] != "NULL" ? $record[3] : null,
             'ticket_medio' => isset($record[4]) && $record[4] != "NULL" ? (float)$record[4] : null,
@@ -124,9 +125,6 @@ class FilesController extends Controller
      */
     public function edit($id)
     {
-
-        $files = Files::find($id);
-        return response()->json(['status' => 200]);
     }
 
     /**

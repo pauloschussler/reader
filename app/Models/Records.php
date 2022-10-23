@@ -11,7 +11,7 @@ class Records extends Model
 
     protected $fillable = [
         'cpf',
-        'private',
+        'privado',
         'incompleto',
         'data_ultima_compra',
         'ticket_medio',
