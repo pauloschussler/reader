@@ -16,13 +16,17 @@ Para isso, através do seu terminal, navegue até a pasta onde o projeto foi clo
 ### - Realizar as configurações do Laravel
 #### Arquivo .env
 É importante que o arquivo .env esteja criado, para isso pode-se criar um arquivo na pasta do projeto com o nome **.env** e seu conteúdo deve ser exatamente igual ao do arquivo **.env.example**, como descrito na imagem abaixo.
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/25149710/197437894-eba18720-0dfe-436d-9c53-6467d1071012.png">
 </div>
+
 Através do terminal dentro da pasta do projeto executar os seguintes comandos:
     php artisan key:generate
     php artisan migrate
+    
 Após isso, no arquivo **.env** deve ser alterado o parâmetro **DB_HOST** de **127.0.0.1** para **db**, conforme descrito na imagem abaixo.
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/25149710/197438324-c54c8023-bf8d-45e9-a764-f904fcbd83e8.png">
 </div>
@@ -32,22 +36,29 @@ Após isso, deverá ser possível acessar ao sistema através do endereço: **ht
 
 ## Utilização
 O projeto possui um sistema de login, sendo assim, para fazer uso é necessário fazer o cadastro de um usuário. Ao abrir o endereço do projeto no navegador você será redicionado para a tela de login, nela é possível cliar em registrar-se e fazer o cadastro de um usuário. Na imagem abaixo estão dispotas essas duas telas.
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/25149710/197442582-308c509d-0654-4710-9eda-227e907bbeab.png">
 </div>
+
 Após realizada a autenticação você é redirecionado à tela inicial, a partir tela é possível navegar para dois menus: **Registros** e **Arquivos**.
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/25149710/197443175-9c1d46d2-5491-462c-8fc7-0bf74feb9103.png">
 </div>
-###Arquivos
+
+### Arquivos
 Nesse módulo são realizados os uploads de arquivos .txt e .csv, na tela inicial são listados os arquivos já carregados, e é apresentado o botão para nova adição de arquivos, assim como é permitida a exclusão dos registros de uploads já realizados.
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/25149710/197443174-2de819a2-6b81-40af-b5eb-adcbaade65aa.png">
 <img src="https://user-images.githubusercontent.com/25149710/197443173-52cd8023-a90f-4168-9bbc-058d1cad5539.png">
 </div>
-###Registros
+
+### Registros
 Nesse módulo são listados os dados obtidos através do arquivos carregados, nele é possível fazer a adição de registros manualmente, a edição dos registros existentes e também fazer a exclusão desses registros. Implementei essas funções porque achei condizentes com a imagem do projeto que criei a partir da leitura do desafio. Um detalhe é que os métodos de adição e edição, não estão realizando validações, tanto no forluário (front-end) quando no cadastro (back-end), eu pretendia realizar a validação, mas não concluí a tempo.
 Ressaltando que a validação de CPF e CNPJ está ativa no upload de arquivos, sendo assim, linhas do arquivo que não possuam essas informações corretas, não são adicionadas ao banco de dados.
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/25149710/197443169-dc0e47b7-229f-43fb-ac02-d4ef2c69354e.png">
 </div>
