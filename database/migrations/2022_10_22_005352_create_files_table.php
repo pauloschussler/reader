@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    protected $connection = 'pgsql_migrate';
+
     /**
      * Run the migrations.
      *
@@ -13,12 +16,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        
+        Schema::connection('pgsql_migrate')->create('files', function (Blueprint $table) {
             $table->id();
             $table->string("name")->nullable($value = true);
             $table->integer("user")->nullable($value = true);
             $table->integer("size")->nullable($value = true);
             $table->integer("lines")->nullable($value = true);
+            $table->index('user');
+            $table->foreign('user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::connection('pgsql_migrate')->dropIfExists('files');
     }
 };

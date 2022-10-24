@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    protected $connection = 'pgsql_migrate';
+
     /**
      * Run the migrations.
      *
@@ -13,7 +16,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('records', function (Blueprint $table) {
+        Schema::connection('pgsql_migrate')->create('records', function (Blueprint $table) {
             $table->id();
             $table->char("cpf", 14)->nullable($value = true);
             $table->boolean("privado")->nullable($value = true);
@@ -34,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('records');
+        Schema::connection('pgsql_migrate')->dropIfExists('records');
     }
 };

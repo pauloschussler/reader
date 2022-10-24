@@ -33,7 +33,7 @@ services:
       - reader_network
 
   db:
-    image: postgres:14
+    image: postgres:latest
     restart: always
     container_name: postgres    
     environment:

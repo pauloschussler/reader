@@ -26,3 +26,9 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 ## Estrutura do projeto
 
 ### Banco de dados
+
+O banco de dados relacional utiliza-se do PostgreSQL. Conforme descrito na imagem abaixo, ele possui 7 tabelas, sendo que, 4 delas são de uso exclusivo do Laravel, a tabela "users" é a tabela de usuários do sistema, onde ficam armazenadas as informações de login e as tabelas "files" e "records" são as tabelas utilizadas pela aplicação. Nelas são armazenadas as informações de arquivos já utilizados no upload e também o registros extraídos desses arquivos.
+
+<div align="center">
+![reader](https://user-images.githubusercontent.com/25149710/197432486-6095e7c8-b788-4cbb-bf64-fe1e41728a58.png)
+</div>
