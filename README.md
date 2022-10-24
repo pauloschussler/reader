@@ -12,7 +12,9 @@ Para a montagem do ambiente basta seguir os passos abaixo:
 Clonar esse repositório do github em sua máquina local.
 ### - Contruir o ambiente através do docker
 Para isso, através do seu terminal, navegue até a pasta onde o projeto foi clonado digite o comando:
-    **docker-compose up**
+
+    docker-compose up
+    
 ### - Realizar as configurações do Laravel
 #### Arquivo .env
 É importante que o arquivo .env esteja criado, para isso pode-se criar um arquivo na pasta do projeto com o nome **.env** e seu conteúdo deve ser exatamente igual ao do arquivo **.env.example**, como descrito na imagem abaixo.
@@ -22,6 +24,7 @@ Para isso, através do seu terminal, navegue até a pasta onde o projeto foi clo
 </div>
 
 Através do terminal dentro da pasta do projeto executar os seguintes comandos:
+
     php artisan key:generate
     php artisan migrate
     
