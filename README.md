@@ -19,13 +19,26 @@ Para a montagem do ambiente basta seguir os passos abaixo:
 
 ### - Possuir o docker instalado
 ### - Clonar o repositório
-    Clonar esse repositório do github em sua máquina local.
+Clonar esse repositório do github em sua máquina local.
 ### - Contruir o ambiente através do docker
-    Para isso, através do seu terminal, navegue até a pasta onde o projeto foi clonado digite o comando:
+Para isso, através do seu terminal, navegue até a pasta onde o projeto foi clonado digite o comando:
     **docker-compose up**
+### - Realizar as configurações do Laravel
+#### Arquivo .env
+É importante que o arquivo .env esteja criado, para isso pode-se criar um arquivo na pasta do projeto com o nome **.env** e seu conteúdo deve ser exatamente igual ao do arquivo **.env.example**, como descrito na imagem abaixo.
 <div align="center">
-<img src="https://user-images.githubusercontent.com/25149710/197434643-097d37ae-5505-4e61-a583-6def254e5134.png">
+<img src="https://user-images.githubusercontent.com/25149710/197437894-eba18720-0dfe-436d-9c53-6467d1071012.png">
 </div>
+Através do terminal dentro da pasta do projeto executar os seguintes comandos:
+    php artisan key:generate
+    php artisan migrate
+Após isso, no arquivo **.env** deve ser alterado o parâmetro **DB_HOST** de **127.0.0.1** para **db**, conforme descrito na imagem abaixo.
+<div align="center">
+<img src="https://user-images.githubusercontent.com/25149710/197438324-c54c8023-bf8d-45e9-a764-f904fcbd83e8.png">
+</div>
+
+Após isso, deverá ser possível acessar ao sistema através do endereço: **http://localhost:8000/**
+
 
 ## Utilização
 
