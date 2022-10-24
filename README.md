@@ -17,7 +17,15 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 Para a montagem do ambiente basta seguir os passos abaixo:
 
-- 
+### - Possuir o docker instalado
+### - Clonar o repositório
+    Clonar esse repositório do github em sua máquina local.
+### - Contruir o ambiente através do docker
+    Para isso, através do seu terminal, navegue até a pasta onde o projeto foi clonado digite o comando:
+    **docker-compose up**
+<div align="center">
+<img src="https://user-images.githubusercontent.com/25149710/197434643-097d37ae-5505-4e61-a583-6def254e5134.png">
+</div>
 
 ## Utilização
 
@@ -30,5 +38,5 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 O banco de dados relacional utiliza-se do PostgreSQL. Conforme descrito na imagem abaixo, ele possui 7 tabelas, sendo que, 4 delas são de uso exclusivo do Laravel, a tabela "users" é a tabela de usuários do sistema, onde ficam armazenadas as informações de login e as tabelas "files" e "records" são as tabelas utilizadas pela aplicação. Nelas são armazenadas as informações de arquivos já utilizados no upload e também o registros extraídos desses arquivos.
 
 <div align="center">
-<img src="httpshttps://user-images.githubusercontent.com/25149710/197432486-6095e7c8-b788-4cbb-bf64-fe1e41728a58.png">
+<img src="https://user-images.githubusercontent.com/25149710/197432486-6095e7c8-b788-4cbb-bf64-fe1e41728a58.png">
 </div>
